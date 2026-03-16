@@ -37,7 +37,7 @@
             backdrop-filter: blur(10px);
             opacity: 0; animation: fadeIn 2s forwards 3.5s;
         }
-        .nav-logo { font-family: var(--font-serif); font-weight: 800; font-size: 1rem; letter-spacing: 4px; }
+        .nav-logo { font-family: var(--font-serif); font-weight: 800; font-size: 0.95rem; letter-spacing: 3px; }
         .nav-links { display: flex; align-items: center; gap: 20px; }
         .nav-links a { text-decoration: none; color: var(--ink); font-size: 0.75rem; letter-spacing: 1px; font-weight: 300; }
         
@@ -90,6 +90,32 @@
             animation: fadeIn 3s forwards 2.5s;
         }
         @keyframes title-appear { to { opacity: 1; filter: blur(0); transform: scale(1); } }
+
+        /* 히어로 하단: 스크롤 유도 */
+        .hero-scroll-hint {
+            position: absolute; bottom: 32px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex; flex-direction: column; align-items: center; gap: 12px;
+            opacity: 0;
+            animation: fadeIn 2s forwards 3.8s;
+            text-decoration: none; color: inherit;
+        }
+        .hero-scroll-hint span {
+            font-family: var(--font-sans); font-size: 0.7rem; font-weight: 300;
+            letter-spacing: 3px; color: var(--ink);
+        }
+        .hero-scroll-arrow {
+            width: 0; height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid var(--ink);
+            animation: scroll-arrow-bounce 2s ease-in-out infinite;
+        }
+        @keyframes scroll-arrow-bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.9; }
+            50% { transform: translateY(8px); opacity: 0.5; }
+        }
 
         /* --- [PHILOSOPHY] 반응형 --- */
         .section-philosophy {
@@ -272,7 +298,7 @@
 <body>
 
     <nav>
-        <div class="nav-logo">명경지수</div>
+        <div class="nav-logo">STUDIO NIRVANA</div>
         <div class="nav-links">
             <a href="#brand-story">이야기</a>
             <a href="#product">소개</a>
@@ -290,6 +316,10 @@
             <h1 class="main-title">생각맑음</h1>
             <p class="slogan">명경지수(明鏡止水)</p>
         </div>
+        <a href="#brand-story" class="hero-scroll-hint" aria-label="아래로 스크롤">
+            <span>내려서 스크롤하기</span>
+            <div class="hero-scroll-arrow"></div>
+        </a>
     </section>
 
     <section class="section-philosophy" id="brand-story">
