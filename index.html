@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>생각맑음 | 명경지수</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --sand-beige: #E8E2D9;
+            --off-white: #FDFBF9;
+            --ink: #1A1A1B;
+            --font-serif: 'Nanum Myeongjo', serif;
+            --font-sans: 'Noto Sans KR', sans-serif;
+            --transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { 
+            background-color: var(--off-white); 
+            color: var(--ink); 
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            word-break: keep-all;
+        }
+
+        /* --- [NAV] 반응형 네비게이션 --- */
+        nav {
+            position: fixed; top: 0; width: 100%;
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            background: rgba(253, 251, 249, 0.7);
+            backdrop-filter: blur(10px);
+            opacity: 0; animation: fadeIn 2s forwards 3.5s;
+        }
+        .nav-logo { font-family: var(--font-serif); font-weight: 800; font-size: 1rem; letter-spacing: 4px; }
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--ink); font-size: 0.75rem; letter-spacing: 1px; font-weight: 300; }
+        
+        .buy-btn-top { 
+            background-color: var(--ink); color: var(--off-white) !important;
+            padding: 10px 20px; font-family: var(--font-serif);
+            font-weight: 700; letter-spacing: 2px;
+        }
+
+        /* --- [HERO] 반응형 중앙 정렬 --- */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative; padding: 0 20px;
+        }
+        .ripple-wrap {
+            position: absolute; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .ripple {
+            position: absolute; border: 0.5px solid var(--ink); border-radius: 50%;
+            opacity: 0; transform: scale(0);
+            animation: ripple-ani 4s cubic-bezier(0.2, 0.4, 0.3, 1) 2;
+        }
+        .ripple.r2 { animation-delay: 1s; }
+        @keyframes ripple-ani {
+            0% { transform: scale(0); opacity: 0; }
+            20% { opacity: 0.15; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        .title-container {
+            position: relative; z-index: 10;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .main-title {
+            font-family: var(--font-serif); writing-mode: vertical-rl; text-orientation: upright;
+            font-size: clamp(3.5rem, 10vw, 5.5rem);
+            font-weight: 700;
+            letter-spacing: 1.5rem;
+            margin-right: 0;
+            margin-bottom: -1.5rem;
+            opacity: 0; filter: blur(20px); transform: scale(0.9);
+            animation: title-appear 3.5s cubic-bezier(0.19, 1, 0.22, 1) forwards 0.5s;
+        }
+        .slogan {
+            margin-top: 40px; font-family: var(--font-serif); 
+            font-size: clamp(0.85rem, 3vw, 1.1rem);
+            letter-spacing: 8px; margin-right: -8px; 
+            white-space: nowrap; opacity: 0;
+            animation: fadeIn 3s forwards 2.5s;
+        }
+        @keyframes title-appear { to { opacity: 1; filter: blur(0); transform: scale(1); } }
+
+        /* --- [PHILOSOPHY] 반응형 --- */
+        .section-philosophy {
+            min-height: 80vh; background-color: var(--sand-beige);
+            display: flex; align-items: center; justify-content: center;
+            padding: 100px 10%; text-align: center;
+        }
+        .philosophy-wrap h2 { font-family: var(--font-serif); font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 40px; }
+        .philosophy-wrap p { font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 2.2; font-weight: 300; }
+
+        /* --- [PRODUCT] 상세 섹션 (슬라이드 + 스펙) --- */
+        .detail-container {
+            max-width: 1100px;
+            margin: 100px auto;
+            padding: 0 5%;
+        }
+        .detail-main-view {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+        .product-visual {
+            flex: 0 0 400px;
+            height: 500px;
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        .slider-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .slide-item {
+            flex: 0 0 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .img-placeholder {
+            color: #ccc;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+        .slider-dots {
+            position: absolute; bottom: 20px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: 10px;
+        }
+        .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            border: 1px solid var(--ink, #1a1a1b);
+            cursor: pointer; opacity: 0.2;
+        }
+        .dot.active { opacity: 1; background: var(--ink, #1a1a1b); }
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            background: rgba(253, 251, 249, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+            color: var(--ink);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+        .slider-arrow:hover {
+            background: var(--ink);
+            color: var(--off-white);
+            border-color: var(--ink);
+            transform: translateY(-50%) scale(1.05);
+        }
+        .slider-arrow-left {
+            left: 18px;
+        }
+        .slider-arrow-right {
+            right: 18px;
+        }
+        .product-summary { flex: 1; }
+        .brand-tag { font-size: 0.7rem; letter-spacing: 4px; color: #aaa; display: block; margin-bottom: 20px; }
+        .product-summary h2 { font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 25px; }
+        .product-summary p { font-size: 1rem; line-height: 2.2; color: #555; font-weight: 300; margin-bottom: 50px; }
+        .toggle-detail-btn {
+            background: none; border: 1px solid var(--ink, #1a1a1b);
+            padding: 15px 40px; font-family: var(--font-serif);
+            font-size: 0.85rem; letter-spacing: 3px; cursor: pointer;
+            transition: all 0.4s;
+        }
+        .toggle-detail-btn:hover { background: #1a1a1b; color: #fff; }
+        .expand-panel {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-top: 1px solid transparent;
+        }
+        .expand-panel.active {
+            max-height: 800px;
+            opacity: 1;
+            padding: 60px 0;
+            border-top: 1px solid #eee;
+            margin-top: 50px;
+        }
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .spec-group h3 { font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 25px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        .spec-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dotted #eee; font-size: 0.85rem; font-weight: 300; }
+        .spec-row span:first-child { color: #999; }
+        .full-width { grid-column: 1 / -1; }
+
+        /* --- [ESSENCE] 반응형 그리드 --- */
+        .section-essence { padding: 100px 8%; background: #fff; }
+        .essence-container { display: flex; justify-content: space-between; }
+        .essence-item {
+            flex: 1; position: relative; padding: 50px 30px;
+            border-left: 1px solid rgba(0,0,0,0.05); transition: var(--transition);
+        }
+        .essence-item:hover { background: var(--off-white); border-left: 1px solid var(--ink); }
+        .hanja-bg { position: absolute; bottom: -10px; right: -10px; font-family: var(--font-serif); font-size: 6rem; opacity: 0.03; }
+        .ess-name { font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 20px; display: block; }
+
+        /* --- [MEDIA QUERIES] 모바일 최적화 --- */
+        @media (max-width: 900px) {
+            .nav-links a:not(.buy-btn-top) { display: none; }
+            
+            .detail-main-view { flex-direction: column; text-align: center; }
+            .product-visual { flex: 0 0 350px; width: 100%; }
+            .spec-grid { grid-template-cols: 1fr; }
+
+            .essence-container { flex-direction: column; }
+            .essence-item { border-left: none; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 40px 20px; }
+            .essence-item:last-child { border-bottom: none; }
+            .essence-item:hover { border-left: none; background: var(--sand-beige); }
+        }
+
+        @media (max-width: 480px) {
+            .main-title { letter-spacing: 0.8rem; margin-right: -0.8rem; margin-bottom: -0.8rem; }
+            .slogan { letter-spacing: 4px; white-space: normal; text-align: center; }
+        }
+
+        /* --- CTA & Footer --- */
+        .section-cta { padding: 100px 0; text-align: center; }
+        .buy-large { background: var(--ink); color: #fff; border: none; padding: 20px 60px; font-family: var(--font-serif); letter-spacing: 5px; cursor: pointer; font-size: 1rem; transition: var(--transition); }
+        .buy-large:hover { opacity: 0.85; transform: scale(1.02); }
+        footer { padding: 60px; text-align: center; font-size: 0.7rem; color: #bbb; border-top: 1px solid #eee; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn { to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">명경지수</div>
+        <div class="nav-links">
+            <a href="#brand-story">이야기</a>
+            <a href="#product">소개</a>
+            <a href="#essence">배합</a>
+            <a href="#" class="buy-btn-top">구매하기</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="ripple-wrap">
+            <div class="ripple r1" style="width: 300px; height: 300px;"></div>
+            <div class="ripple r2" style="width: 300px; height: 300px;"></div>
+        </div>
+        <div class="title-container">
+            <h1 class="main-title">생각맑음</h1>
+            <p class="slogan">명경지수(明鏡止水)</p>
+        </div>
+    </section>
+
+    <section class="section-philosophy" id="brand-story">
+        <div class="philosophy-wrap reveal">
+            <h2>비워냄으로써 비로소<br>선명해지는 본질</h2>
+            <p>우리는 수많은 잡념의 파도 속에 살아갑니다.<br>진정한 활력은 채워 넣는 것이 아니라,<br>불필요한 소음을 맑게 걸러낼 때 시작됩니다.</p>
+        </div>
+    </section>
+
+    <section class="detail-container reveal" id="product">
+        <div class="detail-main-view">
+            <div class="product-visual">
+                <button class="slider-arrow slider-arrow-left" id="prevSlide" type="button">〈</button>
+                <div class="slider-track" id="mainSlider">
+                    <div class="slide-item">
+                        <div class="img-placeholder">제품 정면 실사</div>
+                    </div>
+                    <div class="slide-item">
+                        <div class="img-placeholder">패키지 측면 질감</div>
+                    </div>
+                    <div class="slide-item">
+                        <div class="img-placeholder">제형(알약) 근접 촬영</div>
+                    </div>
+                </div>
+                <button class="slider-arrow slider-arrow-right" id="nextSlide" type="button">〉</button>
+                
+                <div class="slider-dots">
+                    <span class="dot active" onclick="moveSlide(0)"></span>
+                    <span class="dot" onclick="moveSlide(1)"></span>
+                    <span class="dot" onclick="moveSlide(2)"></span>
+                </div>
+            </div>
+
+            <div class="product-summary">
+                <span class="brand-tag">NIRVANA</span>
+                <h2>정갈한 몰입의 도구</h2>
+                <p>
+                    단순한 섭취를 넘어 당신의 공간과 일상을 정돈하는 의식을 제안합니다. 
+                    무광의 정갈한 패키지 속에 담긴 30알의 고요함을 경험하십시오.
+                </p>
+                <button class="toggle-detail-btn" id="viewDetailBtn">
+                    자세히 보기 <span class="plus-icon">+</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="expand-panel" id="detailPanel">
+            <div class="spec-grid">
+                <div class="spec-group">
+                    <h3>본질의 설계 (SPEC)</h3>
+                    <div class="spec-row"><span>내용량</span><span>650mg x 30정 (19.5g)</span></div>
+                    <div class="spec-row"><span>식품유형</span><span>기타가공품</span></div>
+                    <div class="spec-row"><span>보관방법</span><span>실온 보관 (직사광선 회피)</span></div>
+                </div>
+                <div class="spec-group">
+                    <h3>섭취의 의식 (HOW TO)</h3>
+                    <div class="spec-row"><span>권장량</span><span>1일 1회, 1회 1정</span></div>
+                    <div class="spec-row"><span>방법</span><span>충분한 물과 함께 섭취</span></div>
+                    <div class="spec-row"><span>주의사항</span><span>고카페인 함유에 유의하십시오</span></div>
+                </div>
+                <div class="spec-group full-width">
+                    <h3>신뢰의 증명 (CERTIFICATE)</h3>
+                    <p>생각맑음은 식품안전관리인증(HACCP)을 받은 엄격한 제조 공정에서 생산됩니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-essence" id="essence">
+        <div class="essence-container reveal">
+            <div class="essence-item"><span class="hanja-bg">覺</span><span class="ess-name">카페인</span><p style="font-size:0.85rem; color:#777;">의식을 정갈하게 깨우는 정수</p></div>
+            <div class="essence-item"><span class="hanja-bg">靜</span><span class="ess-name">테아닌</span><p style="font-size:0.85rem; color:#777;">고요한 몰입의 기운</p></div>
+            <div class="essence-item"><span class="hanja-bg">專</span><span class="ess-name">티로신</span><p style="font-size:0.85rem; color:#777;">흔들림 없는 집중의 힘</p></div>
+            <div class="essence-item"><span class="hanja-bg">氣</span><span class="ess-name">홍삼</span><p style="font-size:0.85rem; color:#777;">본연에서 차오르는 활력</p></div>
+        </div>
+    </section>
+
+    <section class="section-cta reveal">
+        <button class="buy-large">상품 구매하기</button>
+    </section>
+
+    <footer>&copy; 2026 명경지수. BEYOND THE CLUTTER.</footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- 상세 정보 전용 JS ---
+        const btn = document.getElementById('viewDetailBtn');
+        const panel = document.getElementById('detailPanel');
+        const slider = document.getElementById('mainSlider');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        let currentIndex = 0;
+
+        // 1. 패널 토글
+        btn.addEventListener('click', () => {
+            panel.classList.toggle('active');
+            btn.innerHTML = panel.classList.contains('active') ? 
+                '닫기 <span class="plus-icon">-</span>' : 
+                '자세히 보기 <span class="plus-icon">+</span>';
+        });
+
+        // 2. 슬라이더 제어
+        function moveSlide(index) {
+            const total = dots.length;
+            currentIndex = (index + total) % total;
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentIndex].classList.add('active');
+        }
+
+        // 좌우 화살표 제어
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => moveSlide(currentIndex - 1));
+            nextBtn.addEventListener('click', () => moveSlide(currentIndex + 1));
+        }
+    </script>
+</body>
+</html>
