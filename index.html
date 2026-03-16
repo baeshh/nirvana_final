@@ -24,6 +24,7 @@
             font-family: var(--font-sans);
             overflow-x: hidden;
             word-break: keep-all;
+            overflow-anchor: auto;
         }
 
         /* --- [NAV] 반응형 네비게이션 --- */
@@ -250,6 +251,11 @@
 
         .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
         .reveal.active { opacity: 1; transform: translateY(0); }
+        /* 모바일: transform 제거로 스크롤 튐 방지 (자세히 보기 영역 등) */
+        @media (max-width: 900px) {
+            .reveal { transform: none; }
+            .reveal.active { transform: none; }
+        }
         @keyframes fadeIn { to { opacity: 1; } }
     </style>
 </head>
