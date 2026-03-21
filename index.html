@@ -339,19 +339,6 @@
         .certificate-intro {
             font-size: 0.9rem; line-height: 1.9; color: #555; font-weight: 300; margin-bottom: 1.25em;
         }
-        .haccp-block {
-            display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-            margin-top: 40px; padding: 24px 28px;
-            background: var(--off-white); border: 1px solid rgba(0,0,0,0.06);
-            max-width: 720px;
-        }
-        .haccp-block img {
-            width: 72px; height: auto; flex-shrink: 0; object-fit: contain;
-        }
-        .haccp-block p {
-            flex: 1; min-width: 200px; font-size: 0.88rem; line-height: 1.85;
-            color: #444; font-weight: 300; margin: 0;
-        }
         .certificate-images {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -455,8 +442,6 @@
             .certificate-item .certificate-img-wrap { height: 160px; }
             .certificate-item .certificate-label { font-size: 0.65rem; letter-spacing: 1px; }
             .expand-panel.active { padding-bottom: 100px; }
-            .haccp-block { flex-direction: column; text-align: center; justify-content: center; }
-            .haccp-block p { min-width: 0; }
         }
 
         /* --- CTA & Footer --- */
@@ -649,9 +634,6 @@
                             <div class="certificate-img-wrap"><img src="./assets/license_hanaksa.png" alt="한약사 면허증"></div>
                             <span class="certificate-label">한약사</span>
                         </div>
-                    </div>
-                    <div class="haccp-block">
-                        <img src="./assets/haccp_badge.png" alt="식품안전관리인증 HACCP">
                     </div>
                 </div>
             </div>
