@@ -197,8 +197,9 @@
         .philosophy-item p {
             font-size: 0.9rem; line-height: 2.2; color: #555; font-weight: 300;
         }
+        .philosophy-item > p:not(.stamp-note) { margin-bottom: 1.15em; }
         .philosophy-item .stamp-note {
-            margin-top: 20px; color: #aaa; font-weight: 100; font-size: 0.8rem;
+            margin-top: 1.5em; color: #aaa; font-weight: 100; font-size: 0.8rem;
         }
         .collapse-btn {
             background: none; border: 1px solid var(--ink);
@@ -239,13 +240,13 @@
         }
         .slider-track {
             display: flex;
-            width: 200%;
+            width: 400%;
             height: 100%;
             transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
         }
         .slide-item {
-            flex: 0 0 50%;
-            width: 50%;
+            flex: 0 0 25%;
+            width: 25%;
             min-width: 0;
             height: 100%;
             display: flex;
@@ -336,7 +337,20 @@
             overflow-y: auto;
         }
         .certificate-intro {
-            font-size: 0.9rem; line-height: 1.9; color: #555; font-weight: 300; margin-bottom: 32px;
+            font-size: 0.9rem; line-height: 1.9; color: #555; font-weight: 300; margin-bottom: 1.25em;
+        }
+        .haccp-block {
+            display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+            margin-top: 40px; padding: 24px 28px;
+            background: var(--off-white); border: 1px solid rgba(0,0,0,0.06);
+            max-width: 720px;
+        }
+        .haccp-block img {
+            width: 72px; height: auto; flex-shrink: 0; object-fit: contain;
+        }
+        .haccp-block p {
+            flex: 1; min-width: 200px; font-size: 0.88rem; line-height: 1.85;
+            color: #444; font-weight: 300; margin: 0;
         }
         .certificate-images {
             display: grid;
@@ -387,7 +401,22 @@
         }
         .essence-item:hover { background: var(--off-white); border-left: 1px solid var(--ink); }
         .hanja-bg { position: absolute; bottom: -10px; right: -10px; font-family: var(--font-serif); font-size: 6rem; opacity: 0.03; }
-        .ess-name { font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 20px; display: block; }
+        .ess-name { font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 16px; display: block; }
+        .ess-consumer {
+            font-size: 0.9rem; line-height: 2.05; color: var(--ink); font-weight: 300;
+            margin: 0 0 0.85em;
+        }
+        .ess-scientific {
+            font-size: 0.8rem; line-height: 1.95; color: #999; font-weight: 300;
+            margin: 1em 0 0;
+        }
+        .ess-legend-wrap {
+            max-width: 900px; margin: 48px auto 0; padding: 0 5%;
+            text-align: center;
+        }
+        .ess-legend {
+            font-size: 0.72rem; line-height: 1.9; color: #aaa; font-weight: 300;
+        }
 
         /* --- [MEDIA QUERIES] 모바일 최적화 --- */
         @media (max-width: 900px) {
@@ -416,18 +445,23 @@
         @media (max-width: 480px) {
             .main-title { letter-spacing: 0.8rem; margin-right: -0.8rem; margin-bottom: -0.8rem; }
             .slogan { letter-spacing: 4px; white-space: normal; text-align: center; }
+            /* 모바일도 2×2: 1행 양의·한의 / 2행 양약사·한약사 */
             .certificate-images {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
                 margin-bottom: 32px;
             }
-            .certificate-item .certificate-img-wrap { height: 200px; }
+            .certificate-item { padding: 10px 8px; }
+            .certificate-item .certificate-img-wrap { height: 160px; }
+            .certificate-item .certificate-label { font-size: 0.65rem; letter-spacing: 1px; }
             .expand-panel.active { padding-bottom: 100px; }
+            .haccp-block { flex-direction: column; text-align: center; justify-content: center; }
+            .haccp-block p { min-width: 0; }
         }
 
         /* --- CTA & Footer --- */
         .section-cta { padding: 100px 0; text-align: center; }
-        .buy-large { background: var(--ink); color: #fff; border: none; padding: 20px 60px; font-family: var(--font-serif); letter-spacing: 5px; cursor: pointer; font-size: 1rem; transition: var(--transition); }
+        .buy-large { display: inline-block; background: var(--ink); color: #fff; border: none; padding: 20px 60px; font-family: var(--font-serif); letter-spacing: 5px; cursor: pointer; font-size: 1rem; transition: var(--transition); text-decoration: none; }
         .buy-large:hover { opacity: 0.85; transform: scale(1.02); }
         footer {
             padding: 50px 20px 60px; text-align: center; font-size: 0.7rem; color: #bbb;
@@ -462,7 +496,7 @@
             <a href="#brand-story">이야기</a>
             <a href="#product">소개</a>
             <a href="#essence">배합</a>
-            <a href="#" class="buy-btn-top">구매하기</a>
+            <a href="https://smartstore.naver.com/studio-nirvana/products/13269191347?is_retargeting=true&amp;c=260101_p_Naver_product&amp;pid=Naver&amp;deep_link_value=https%3A%2F%2Fsmartstore.naver.com%2Fstudio-nirvana%2Fproducts%2F13269191347%3Fka_ref%3Dkakao%26ka_req_id%3DgG0RwOMoKBfMu1u-YlFkAA%26ka_template%3Dcommerce_basic&amp;dtm_source=KK&amp;dtm_detail=gG0RwOMoKBfMu1u-YlFkAA&amp;dtm_campaign=commerce_basic&amp;dtm_medium=OG" class="buy-btn-top" target="_blank" rel="noopener">구매하기</a>
         </div>
     </nav>
 
@@ -506,7 +540,7 @@
                                 <div class="hanja-stamp">1</div>
                                 <h3>起(기): 고요한 몰입의 시작</h3>
                                 <p>잡념의 물결이 잦아들고, 마음이 맑은 거울과 고요한 물처럼 맑아지는 찰나가 있습니다. 우리는 그 상태를 '맑은 생각'이라 부릅니다.</p>
-                                <p>너바나 '맑은생각'은 약학대학원 연구실의 차분한 새벽에서 시작되었습니다. 밤낮 없이 연구에 몰두하는 동료들의 뒷모습을 지켜보며 우리는 근본적인 질문을 던졌습니다.</p>
+                                <p>너바나 '맑은생각'은 성균관대학교 약학대학원 연구실의 차분한 새벽에서 시작되었습니다. 밤낮 없이 연구에 몰두하는 동료들의 뒷모습을 지켜보며 우리는 근본적인 질문을 던졌습니다.</p>
                                 <p>"어떻게 해야 흔들림 없이, 깊은 몰입의 상태를 유지할 수 있을까."</p>
                                 <p class="stamp-note">明(맑을 명), 鏡(거울 경)</p>
                             </div>
@@ -546,10 +580,16 @@
                 <button class="slider-arrow slider-arrow-left" id="prevSlide" type="button">〈</button>
                 <div class="slider-track" id="mainSlider">
                     <div class="slide-item">
-                        <img src="./assets/product_front.png" alt="생각맑음 제품" class="slide-img">
+                        <img src="./assets/product_1.png" alt="생각맑음 제품 1" class="slide-img">
                     </div>
                     <div class="slide-item">
-                        <img src="./assets/product_side.png" alt="생각맑음 패키지와 제형" class="slide-img">
+                        <img src="./assets/product_2.png" alt="생각맑음 제품 2" class="slide-img">
+                    </div>
+                    <div class="slide-item">
+                        <img src="./assets/product_3.png" alt="생각맑음 제품 3" class="slide-img">
+                    </div>
+                    <div class="slide-item">
+                        <img src="./assets/product_4.png" alt="생각맑음 제품 4" class="slide-img">
                     </div>
                 </div>
                 <button class="slider-arrow slider-arrow-right" id="nextSlide" type="button">〉</button>
@@ -557,6 +597,8 @@
                 <div class="slider-dots">
                     <span class="dot active" onclick="moveSlide(0)"></span>
                     <span class="dot" onclick="moveSlide(1)"></span>
+                    <span class="dot" onclick="moveSlide(2)"></span>
+                    <span class="dot" onclick="moveSlide(3)"></span>
                 </div>
             </div>
 
@@ -589,11 +631,11 @@
                 </div>
                 <div class="spec-group full-width">
                     <h3>신뢰의 증명 (CERTIFICATE)</h3>
-                    <p class="certificate-intro">전문 약사와 함께 정교한 배합을 설계하고, 한의사의 심도 있는 자문을 더 해 원료 하나하나의 기운을 조화롭게 다스렸습니다.</p>
+                    <p class="certificate-intro">성균관대학교 약학대학원 연구원인 대표가 영양제 개발 전문 의사, 약사와 함께 원료 배합을 정교하게 설계했습니다. 또한, 한의사의 깊이 있는 자문을 더해 원료 간 조화와 균형을 세심하게 담아냈습니다.</p>
                     <div class="certificate-images">
                         <div class="certificate-item">
-                            <div class="certificate-img-wrap"><img src="./assets/license_hanaksa.png" alt="한약사 면허증"></div>
-                            <span class="certificate-label">한약사</span>
+                            <div class="certificate-img-wrap"><img src="./assets/license_uisa.png" alt="의사 면허증"></div>
+                            <span class="certificate-label">의사</span>
                         </div>
                         <div class="certificate-item">
                             <div class="certificate-img-wrap"><img src="./assets/license_hanuisa.png" alt="한의사 면허증"></div>
@@ -604,9 +646,13 @@
                             <span class="certificate-label">약사</span>
                         </div>
                         <div class="certificate-item">
-                            <div class="certificate-img-wrap"><img src="./assets/license_uisa.png" alt="의사 면허증"></div>
-                            <span class="certificate-label">의사</span>
+                            <div class="certificate-img-wrap"><img src="./assets/license_hanaksa.png" alt="한약사 면허증"></div>
+                            <span class="certificate-label">한약사</span>
                         </div>
+                    </div>
+                    <div class="haccp-block">
+                        <img src="./assets/haccp_badge.png" alt="식품안전관리인증 HACCP">
+                        <p>식품안전관리인증(HACCP)을 통해 제조 공정 전반에 깊은 신뢰를 더했습니다.</p>
                     </div>
                 </div>
             </div>
@@ -615,24 +661,48 @@
 
     <section class="section-essence" id="essence">
         <div class="essence-container reveal">
-            <div class="essence-item"><span class="hanja-bg">覺</span><span class="ess-name">카페인</span><p style="font-size:0.85rem; color:#777;">의식을 정갈하게 깨우는 정수</p></div>
-            <div class="essence-item"><span class="hanja-bg">靜</span><span class="ess-name">테아닌</span><p style="font-size:0.85rem; color:#777;">고요한 몰입의 기운</p></div>
-            <div class="essence-item"><span class="hanja-bg">專</span><span class="ess-name">티로신</span><p style="font-size:0.85rem; color:#777;">흔들림 없는 집중의 힘</p></div>
-            <div class="essence-item"><span class="hanja-bg">氣</span><span class="ess-name">홍삼</span><p style="font-size:0.85rem; color:#777;">본연에서 차오르는 활력</p></div>
+            <div class="essence-item">
+                <span class="hanja-bg">覺</span>
+                <span class="ess-name">카페인</span>
+                <p class="ess-consumer">흐려진 감각을 가볍게 깨워, 보다 또렷한 시작을 돕습니다.</p>
+                <p class="ess-consumer">복잡한 하루의 첫 순간에 맑은 집중의 결을 더해줍니다.</p>
+                <p class="ess-scientific">* 카페인은 아데노신 수용체에 작용하여 졸림을 줄이고, 각성 상태 유지에 도움을 줄 수 있는 성분으로 알려져 있습니다.</p>
+            </div>
+            <div class="essence-item">
+                <span class="hanja-bg">靜</span>
+                <span class="ess-name">테아닌</span>
+                <p class="ess-consumer">긴장을 과하게 높이지 않으면서, 편안한 집중의 흐름을 돕습니다. 차분하고 안정적인 몰입을 더합니다.</p>
+                <p class="ess-scientific">* 테아닌은 편안한 상태와 관련된 뇌파 변화와 이완감에 대한 연구가 이루어져 온 성분입니다. 카페인과 함께 사용될 때, 부드러운 집중감을 보다 더 돕는 방향으로도 연구되고 있습니다.</p>
+            </div>
+            <div class="essence-item">
+                <span class="hanja-bg">專</span>
+                <span class="ess-name">티로신</span>
+                <p class="ess-consumer">집중이 필요한 순간, 사고의 흐름을 안정적으로 이어갈 수 있도록 받쳐주는 성분입니다. 흔들리기 쉬운 순간에도 생각의 중심을 단정하게 세우는 데 도움을 줍니다.</p>
+                <p class="ess-scientific">* 티로신은 도파민, 노르에피네프린 등 인지와 집중에 관련된 신경전달물질의 전구체로 작용하는 아미노산입니다. 특히 인지적 부담이 큰 상황에서 그 역할이 연구되어 왔습니다.</p>
+            </div>
+            <div class="essence-item">
+                <span class="hanja-bg">氣</span>
+                <span class="ess-name">홍삼</span>
+                <p class="ess-consumer">몸과 마음이 지치기 쉬운 일상 속에서, 차분하고 단단한 활력의 바탕을 더합니다. 하루를 고르게 이어갈 수 있는 활력을 채워주는 원료입니다.</p>
+                <p class="ess-scientific">* 홍삼은 진세노사이드 등 다양한 성분을 함유하고 있으며, 활력과 항산화 관련 분야에서 폭넓게 연구되어 온 원료입니다.</p>
+            </div>
+        </div>
+        <div class="ess-legend-wrap reveal">
+            <p class="ess-legend">*로 표기한 문구는 의약학적 관점에서 서술한 설명문입니다. 별표가 없는 문구는 소비자가 보다 쉽게 이해할 수 있도록 풀어서 작성한 문구입니다.</p>
         </div>
     </section>
 
     <section class="section-cta reveal">
-        <button class="buy-large">구매하기</button>
+        <a href="https://smartstore.naver.com/studio-nirvana/products/13269191347?is_retargeting=true&amp;c=260101_p_Naver_product&amp;pid=Naver&amp;deep_link_value=https%3A%2F%2Fsmartstore.naver.com%2Fstudio-nirvana%2Fproducts%2F13269191347%3Fka_ref%3Dkakao%26ka_req_id%3DgG0RwOMoKBfMu1u-YlFkAA%26ka_template%3Dcommerce_basic&amp;dtm_source=KK&amp;dtm_detail=gG0RwOMoKBfMu1u-YlFkAA&amp;dtm_campaign=commerce_basic&amp;dtm_medium=OG" class="buy-large" target="_blank" rel="noopener">구매하기</a>
     </section>
 
     <footer>
         <div class="footer-copy">&copy; 2026 명경지수. BEYOND THE CLUTTER.</div>
         <div class="footer-icons">
-            <a href="#" class="footer-icon" aria-label="인스타그램" target="_blank" rel="noopener">
+            <a href="https://www.instagram.com/studio._.nirvana/" class="footer-icon" aria-label="인스타그램" target="_blank" rel="noopener noreferrer">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>
-            <a href="#" class="footer-icon" aria-label="스토어" target="_blank" rel="noopener">
+            <a href="https://smartstore.naver.com/studio-nirvana/products/13269191347?is_retargeting=true&amp;c=260101_p_Naver_product&amp;pid=Naver&amp;deep_link_value=https%3A%2F%2Fsmartstore.naver.com%2Fstudio-nirvana%2Fproducts%2F13269191347%3Fka_ref%3Dkakao%26ka_req_id%3DgG0RwOMoKBfMu1u-YlFkAA%26ka_template%3Dcommerce_basic&amp;dtm_source=KK&amp;dtm_detail=gG0RwOMoKBfMu1u-YlFkAA&amp;dtm_campaign=commerce_basic&amp;dtm_medium=OG" class="footer-icon" aria-label="스토어" target="_blank" rel="noopener">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
             </a>
         </div>
